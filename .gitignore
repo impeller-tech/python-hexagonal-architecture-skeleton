@@ -1,3 +1,9 @@
+# macOS indexing / metadata
+.DS_Store
+
+# uv
+.uv/
+
 # IntelliJ
 .idea
 
