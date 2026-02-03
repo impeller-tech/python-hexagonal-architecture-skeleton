@@ -62,15 +62,19 @@ The project follows these key principles:
 git clone https://github.com/your-username/python-hexagonal-architecture
 ```
 
-2. Create a virtual environment:
+2. Install [uv](https://docs.astral.sh/uv/) (if needed):
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-3. Install dependencies:
+3. Create a virtual environment and install dependencies:
 ```bash
-pip install -r requirements/dev.txt
+uv sync --all-groups
+```
+
+To install only production dependencies:
+```bash
+uv sync --no-dev
 ```
 
 ## 📝 Usage
@@ -85,15 +89,24 @@ pip install -r requirements/dev.txt
 
 Run tests using:
 ```bash
-pytest
+uv run pytest
 ```
 
 ## 📦 Project Dependencies
 
-- **Development**: See `requirements/dev.txt`
-- **Testing**: See `requirements/test.txt`
-- **Production**: See `requirements/prod.txt`
-- **Common**: See `requirements/common.txt`
+Dependencies are managed with [uv](https://docs.astral.sh/uv/) and declared in `pyproject.toml`:
+
+- **Base**: `[project.dependencies]`
+- **Production extras**: `[project.optional-dependencies.prod]`
+- **Development**: `[dependency-groups.dev]` (e.g. pytest, ruff)
+- **Testing**: `[dependency-groups.test]` (e.g. pytest, pytest-cov)
+
+Add dependencies with:
+```bash
+uv add <package>           # production
+uv add --dev <package>      # dev group
+uv add --group test <package>  # test group
+```
 
 ## 📄 License
 
