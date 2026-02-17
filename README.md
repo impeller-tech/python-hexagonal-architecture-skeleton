@@ -98,8 +98,14 @@ Dependencies are managed with [uv](https://docs.astral.sh/uv/) and declared in `
 
 - **Base**: `[project.dependencies]`
 - **Production extras**: `[project.optional-dependencies.prod]`
+- **Optional adapter extras**: e.g. `[project.optional-dependencies.rabbitmq]`
 - **Development**: `[dependency-groups.dev]` (e.g. pytest, ruff)
 - **Testing**: `[dependency-groups.test]` (e.g. pytest, pytest-cov)
+
+Install RabbitMQ adapter dependencies with:
+```bash
+uv sync --extra rabbitmq
+```
 
 Add dependencies with:
 ```bash
